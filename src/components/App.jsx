@@ -19,6 +19,7 @@ import { Route, Routes } from 'react-router-dom';
 import HomePages from './pages/HomePages';
 import MoviesPages from './pages/MoviesPages';
 import Layout from './Layout/Layout';
+import MoviesDetails from './API/MoviesDetails/MoviesDetails';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePages />} />
         <Route path="movies" element={<MoviesPages />} />
+        <Route path="movies/:moviesId" element={<MoviesDetails />} />
       </Route>
     </Routes>
   );
