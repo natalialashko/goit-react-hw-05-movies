@@ -1,15 +1,17 @@
 import ResultSearch from 'components/ResultSearch/ResultSearch';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState} from 'react';
+import { useSearchParams } from "react-router-dom";
+
 
 const Movies = () => {
-    const [valueSearch, setValueSearch] = useState('');
-    
-
+  const [valueSearch, setValueSearch] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams()
   
-    
+  const search = searchParams.get('search') ?? "";
+  console.log('search:>> ', search )
+  
   const handleInputChange = e => {
-    setValueSearch(e.currentTarget.value.toLowerCase());
+    setValueSearch(e.target.value.toLowerCase());
   };
 
     const handleSubmit = evt => {
@@ -20,17 +22,14 @@ const Movies = () => {
             alert('Введіть назву для пошуку');
             return;
         }
-        console.log('valueSearch>>', valueSearch);
-        
+         setSearchParams({search:valueSearch })    
           };
 
-       
-
+  
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
-          // className={css.searchForm_input}
           type="text"
           autoComplete="off"
           autoFocus
@@ -43,17 +42,8 @@ const Movies = () => {
           <span>Search</span>
         </button>
       </form>
-      <ResultSearch valueSearch={valueSearch}/>
-          {/* <ul>
-        {arrayMovieSearch.map(ellArray => (
-          <li key={ellArray.id}>
-            <a>
-              {ellArray.title}
-              {ellArray.name}
-            </a>
-          </li>
-        ))}
-      </ul>  */}
+      <ResultSearch valueSearch={search}/>
+       
     </div>
   );
 };

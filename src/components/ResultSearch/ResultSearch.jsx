@@ -1,7 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useLocation, NavLink } from 'react-router-dom';
+
 const ResultSearch = ({ valueSearch }) => {
-    const [arrayMovieSearch, setArrayMovieSearch] = useState([]);
+  const [arrayMovieSearch, setArrayMovieSearch] = useState([]);
+   const location = useLocation();
+  const backLinkHref = location.state?.from ?? "/movies";
     
 const options = {
     method: 'GET',
@@ -34,10 +38,10 @@ const options = {
        <ul>
         {arrayMovieSearch.map(ellArray => (
           <li key={ellArray.id}>
-            <a>
+            <NavLink to={`/movies/${String(ellArray.id)}`}>
               {ellArray.title}
               {ellArray.name}
-            </a>
+            </NavLink>
           </li>
         ))}
       </ul> 

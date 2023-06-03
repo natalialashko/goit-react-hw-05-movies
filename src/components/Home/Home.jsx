@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 function Home() {
-     const [arrayMovie, setArrayMovie] = useState([]);
+  const [arrayMovie, setArrayMovie] = useState([]);
+    const location = useLocation();
+  console.log('location/ state >>',location.state);
+
   const options = {
     method: 'GET',
     headers: {
@@ -31,15 +35,15 @@ function Home() {
       <ul>
         {arrayMovie.map(ellArray => (
           <li key={ellArray.id}>
-            <Link to={`/movies/${String(ellArray.id)}`}>
+            <NavLink to={`/movies/${String(ellArray.id)}`}>
               {ellArray.title}
               {ellArray.name}
 
-            </Link>
+            </NavLink>
           </li>
         ))}
       </ul>
-      
+       <Outlet/>
     </div>
   );
 }
