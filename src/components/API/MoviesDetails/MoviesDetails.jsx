@@ -8,10 +8,10 @@ const MoviesDetails = () => {
   const params = useParams();
   const [currentMovies, setCurrentMovies] = useState([]);
 
-  const location = useLocation();
-  const backLinkHref = location.state?.from ?? "/";
+  const locationDetails = useLocation();
+  // const backLinkHref = locationDetails.state ?? "/";
 
-  console.log('location. state >>',location);
+  console.log('location. state >>',locationDetails);
   // console.log(params.moviesId);
   useEffect(() => {
     const options = {
@@ -42,7 +42,7 @@ const MoviesDetails = () => {
   console.log('currentMovies.genres', currentMovies.genres);
   return (
     <div>
-      <Link to={backLinkHref}>go back</Link>
+      <Link to={locationDetails.state ?? '/'}>go back</Link>
       <br />
       <img width="350" src={pathImgCurrentMovies} alt="" />
       <h2>{currentMovies.title}</h2>

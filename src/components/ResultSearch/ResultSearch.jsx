@@ -5,9 +5,11 @@ import { useLocation, NavLink } from 'react-router-dom';
 const ResultSearch = ({ valueSearch }) => {
   const [arrayMovieSearch, setArrayMovieSearch] = useState([]);
    const location = useLocation();
-  const backLinkHref = location.state?.from ?? "/movies";
+  // const backLinkHref = location.state?.from ?? "/movies";
     
-const options = {
+
+  useEffect(() => {
+   const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
@@ -15,7 +17,6 @@ const options = {
         'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMmJmNDU3NGU0NmM4MDU0ZjVmMDkyZmQ2NGQzMWIzZiIsInN1YiI6IjY0MzcwNGQwMWY3NDhiMDA3NzE1NGVkZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WJVw4SC0wxekMACd_HjNy4-mtG2EpEBFxroutosJfJc',
     },
   };
- useEffect(() => {
             if (!valueSearch) {
                 return;
             }
@@ -38,7 +39,7 @@ const options = {
        <ul>
         {arrayMovieSearch.map(ellArray => (
           <li key={ellArray.id}>
-            <NavLink to={`/movies/${String(ellArray.id)}`}>
+            <NavLink to={`/movies/${String(ellArray.id)}`} state={location}>
               {ellArray.title}
               {ellArray.name}
             </NavLink>
