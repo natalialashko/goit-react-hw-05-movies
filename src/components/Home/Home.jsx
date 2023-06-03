@@ -7,7 +7,9 @@ function Home() {
     const location = useLocation();
   console.log('location/ state >>',location.state);
 
-  const options = {
+ 
+  useEffect(() => {
+     const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
@@ -15,7 +17,6 @@ function Home() {
         'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMmJmNDU3NGU0NmM4MDU0ZjVmMDkyZmQ2NGQzMWIzZiIsInN1YiI6IjY0MzcwNGQwMWY3NDhiMDA3NzE1NGVkZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WJVw4SC0wxekMACd_HjNy4-mtG2EpEBFxroutosJfJc',
     },
   };
-  useEffect(() => {
     fetch(
       'https://api.themoviedb.org/3/trending/all/day?language=en-US',
       options
@@ -27,7 +28,7 @@ function Home() {
         console.log(arrayMovie);
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [arrayMovie]);
 
   return (
       <div>

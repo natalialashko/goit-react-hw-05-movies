@@ -25,8 +25,8 @@ const Cast = () => {
         setCastMovies(response);
       })
       .catch(err => console.error(err));
-  },[]);
-// const urlPhoto = `https://image.tmdb.org/t/p/w500${castMovies.profile_path}`;
+  },[params.moviesId]);
+
   console.log('castMovies--', castMovies);
   return <div>
     

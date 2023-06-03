@@ -25,7 +25,7 @@ const Reviews = () => {
         setReviewsMovies(response);
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [params.moviesId]);
 
   console.log('reviewsMovies.total_results  >>', reviewsMovies.total_results);
   console.log('reviewsMovies  >>', reviewsMovies);
