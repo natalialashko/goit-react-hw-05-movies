@@ -25,7 +25,7 @@ import Reviews from './API/MoviesDetails/Reviews';
 
 function App() {
   return (
-    <Routes>
+    <Routes basename="/goit-react-hw-05-movies">
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePages />} />
         <Route path="movies" element={<MoviesPages />} />
