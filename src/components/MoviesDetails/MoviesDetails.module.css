@@ -1,0 +1,11 @@
+.link{
+    display: block;
+    margin: 10px;
+}
+.info{
+    display: flex;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+.info_movie{
+    padding: 10px;
+}

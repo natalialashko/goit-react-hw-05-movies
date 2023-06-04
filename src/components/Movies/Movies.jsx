@@ -1,24 +1,25 @@
 import ResultSearch from 'components/ResultSearch/ResultSearch';
 import React, { useState} from 'react';
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 
 const Movies = () => {
   const [valueSearch, setValueSearch] = useState('');
   const [searchParams, setSearchParams] = useSearchParams()
-  
+  const location = useLocation();
   const search = searchParams.get('search') ?? "";
   console.log('search:>> ', search )
-  
+   console.log('location:>> ', location )
   const handleInputChange = e => {
     setValueSearch(e.target.value.toLowerCase());
   };
 
-    const handleSubmit = evt => {
+    const upDateSearch = evt => {
         evt.preventDefault();
         console.log('valueSearch>>', valueSearch);
 
-        if (valueSearch.trim() === '') {
+      if (valueSearch.trim() === '') {
+          setSearchParams({})
             alert('Введіть назву для пошуку');
             return;
         }
@@ -28,7 +29,7 @@ const Movies = () => {
   
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={upDateSearch}>
         <input
           type="text"
           autoComplete="off"

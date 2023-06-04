@@ -1,17 +1,20 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
+import css from './MoviesDetails.module.css';
 
 const MoviesDetails = () => {
   const params = useParams();
+
   const [currentMovies, setCurrentMovies] = useState([]);
 
-  const locationDetails = useLocation();
-  // const backLinkHref = locationDetails.state ?? "/";
+  const location = useLocation();
+  const backLinkLocationRef = useRef(location.state?.from ?? '/');
 
-  console.log('location. state >>',locationDetails);
+  console.log('location. state >>', location);
   // console.log(params.moviesId);
   useEffect(() => {
     const options = {
@@ -42,19 +45,27 @@ const MoviesDetails = () => {
   console.log('currentMovies.genres', currentMovies.genres);
   return (
     <div>
-      <Link to={locationDetails.state ?? '/'}>go back</Link>
-      <br />
-      <img width="350" src={pathImgCurrentMovies} alt="" />
-      <h2>{currentMovies.title}</h2>
-      <p>User score: {currentMovies.popularity}%</p>
+      <Link className={css.link} to={backLinkLocationRef.current}>
+        go back
+      </Link>
+      <div className={css.info}>
+        <div className={css.photo_movie}>
+          <img width="350" src={pathImgCurrentMovies} alt="" />
+        </div>
 
-      <p>{currentMovies.overview}</p>
+        <div className={css.info_movie}>
+          <h2>{currentMovies.title}</h2>
+          <p>User score: {currentMovies.popularity}%</p>
 
-      <h2>Genres</h2>
+          <p>{currentMovies.overview}</p>
 
-      {currentMovies?.genres?.map(ellArray => (
-        <span key={ellArray.id}>{ellArray.name} </span>
-      ))}
+          <h2>Genres</h2>
+
+          {currentMovies?.genres?.map(ellArray => (
+            <span key={ellArray.id}>{ellArray.name} </span>
+          ))}
+        </div>
+      </div>
 
       <div>
         <h2>Additional information</h2>
@@ -65,16 +76,21 @@ const MoviesDetails = () => {
               aria-current="page"
               to={`/movies/${String(params.moviesId)}/cast`}
             >
-            Cast
+              Cast
             </Link>
           </li>
           <li key="Reviews">
-            <Link className="nav-link" to={`/movies/${String(params.moviesId)}/reviews`}>
-            Reviews
+            <Link
+              className="nav-link"
+              to={`/movies/${String(params.moviesId)}/reviews`}
+            >
+              Reviews
             </Link>
           </li>
         </ul>
-         <Outlet/>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
       </div>
     </div>
   );

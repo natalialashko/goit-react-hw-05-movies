@@ -39,7 +39,7 @@ const ResultSearch = ({ valueSearch }) => {
        <ul>
         {arrayMovieSearch.map(ellArray => (
           <li key={ellArray.id}>
-            <NavLink to={`/movies/${String(ellArray.id)}`} state={location}>
+            <NavLink to={`/movies/${String(ellArray.id)}`} state={{ from: location }}>
               {ellArray.title}
               {ellArray.name}
             </NavLink>

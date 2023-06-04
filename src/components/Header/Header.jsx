@@ -1,11 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import css from "./Header.module.css"
 
 function Header() {
   return (
-    <div>
-          <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
-          <NavLink className="nav-link" to="/movies">  Movies</NavLink>
+    <div className={css.header}>
+          <NavLink className={css.nav_link } aria-current="page" to="/">Home</NavLink>
+          <NavLink className={css.nav_link } to="/movies">  Movies</NavLink>
     </div>
   );
 }
