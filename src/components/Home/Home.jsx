@@ -29,7 +29,7 @@ function Home() {
         console.log(arrayMovie);
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [arrayMovie]);
 
   return (
       <div>
